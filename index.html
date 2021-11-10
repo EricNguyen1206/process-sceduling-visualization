@@ -20,7 +20,6 @@
                 name="customRadio"
                 class="custom-control-input"
                 value="fcfs"
-                checked
                 onclick="recalculateServiceTime()"
               />
               <label class="custom-control-label" for="FCFS">FCFS</label>
@@ -32,6 +31,7 @@
                 name="customRadio"
                 class="custom-control-input"
                 value="robin"
+                checked
                 onclick="recalculateServiceTime()"
               />
               <label class="custom-control-label" for="robin"
@@ -172,19 +172,27 @@
       <div id="visualizer">
         <h3>Exclusive</h3>
         <div id="exclusive"></div>
-        <div class="waiting">Average waiting time: <span id="waiting-time-exclu"></span> s</div>
+        <div class="waiting"><em>Average waiting time: </em><span id="waiting-time-exclu"></span> <em>s</em></div>
 
         <h3>Nonexclusive</h3>
         <div id="nonexclusive"></div>
-        <div class="waiting">Average waiting time: <span id="waiting-time-nonex"></span> s</div>
+        <div class="waiting"><em>Average waiting time: </em><span id="waiting-time-nonex"></span> <em>s</em></div>
       </div>
     </div>
+    
     <footer style="position: fixed; bottom: 0; right: 0; display: flex; justify-content: space-between; width: 100%;">
-      <p>Chalenge by Huynh Thanh Tam | Code by Nguyen Trong Tin</p>
-      <p>Created ©2021</p>
-      <a src="https://github.com/" href="source://github.com">source code</a>
-      
+      <div>
+        <p>Chalenge by Huynh Thanh Tam | Code by Nguyen Trong Tin</p>
+        <p>Created ©2021</p>
+      </div>
+
+      <div>
+        <a src="https://github.com/EricNguyen1206/process-sceduling-visualization" href="https://github.com/EricNguyen1206/process-sceduling-visualization">source code</a>
+        |
+        <a src="https://process-sceduling-visualization.vercel.app/" href="https://process-sceduling-visualization.vercel.app/">https://process-sceduling-visualization.vercel.app/</a>
+      </div>
     </footer>
+
     <script src="./main.js"></script>
   </body>
 </html>
