@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Process Sceduling Visualization</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="input-container">
+        <div class="controller">
+          <h1>Algorithm:</h1>
+          <form id="algorithm">
+            <div class="custom-control custom-radio">
+              <input
+                type="radio"
+                id="fcfs"
+                name="customRadio"
+                class="custom-control-input"
+                value="fcfs"
+                checked
+                onclick="recalculateServiceTime()"
+              />
+              <label class="custom-control-label" for="FCFS">FCFS</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input
+                type="radio"
+                id="robin"
+                name="customRadio"
+                class="custom-control-input"
+                value="robin"
+                onclick="recalculateServiceTime()"
+              />
+              <label class="custom-control-label" for="robin"
+                >Round Robin</label
+              >
+            </div>
+            <div class="custom-control custom-radio">
+              <input
+                type="radio"
+                id="priority"
+                name="customRadio"
+                class="custom-control-input"
+                value="priority"
+                onclick="recalculateServiceTime()"
+              />
+              <label class="custom-control-label" for="priority"
+                >Priority</label
+              >
+            </div>
+            <div class="custom-control custom-radio">
+              <input
+                type="radio"
+                id="sjf"
+                name="customRadio"
+                class="custom-control-input"
+                value="sjf"
+                onclick="recalculateServiceTime()"
+              />
+              <label class="custom-control-label" for="SJF">SJF</label>
+            </div>
+          </form>
+          <div class="button-group">
+            <div class="table-control table-control">
+              <button id="add-row" onclick="addRow()">More row</button>
+              <button id="delete-row" onclick="deleteRow()">Less row</button>
+            </div>
+
+            <div class="data-figure table-control">
+              <button id="draw" onclick="draw()">Draw</button>
+              <div class="input-group">
+                <label for="input-block">
+                  <button type="button">Quantum</button>
+                </label>
+                <input
+                  id="quantum"
+                  type="number"
+                  class="form-control"
+                  min="1"
+                  max="200"
+                  value="2"
+                  placeholder="Enter a number"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Process</th>
+              <th>Arrival Time</th>
+              <th>Execute Time</th>
+              <th class="priority-only">Priority</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <tr class="table-row">
+              <td>P1</td>
+              <td>
+                <input
+                  class="initial arrivetime"
+                  type="number"
+                  min="0"
+                  max="0"
+                  value="0"
+                  onchange="alert('can\'t change first arrivetime')"
+                />
+              </td>
+              <td>
+                <input
+                  class="initial exectime"
+                  type="number"
+                  min="1"
+                  max="200"
+                  value="5"
+                  onchange="recalculateServiceTime()"
+                />
+              </td>
+              <td class="priority-only initial">
+                <input
+                  class="priority-input"
+                  min="1"
+                  max="200"
+                  type="number"
+                  value="1"
+                  onchange="recalculateServiceTime()"
+                />
+              </td>
+            </tr>
+            <tr class="table-row">
+              <td>P2</td>
+              <td>
+                <input
+                  class="initial arrivetime"
+                  type="number"
+                  min="1"
+                  max="200"
+                  value="1"
+                  onchange="recalculateServiceTime()"
+                />
+              </td>
+              <td>
+                <input
+                  class="initial exectime"
+                  type="number"
+                  value="3"
+                  min="1"
+                  max="200"
+                  onchange="recalculateServiceTime()"
+                />
+              </td>
+              <td class="priority-only initial">
+                <input
+                  class="priority-input"
+                  min="1"
+                  max="200"
+                  type="number"
+                  value="1"
+                  onchange="recalculateServiceTime()"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="visualizer">
+        <h3>Exclusive</h3>
+        <div id="exclusive"></div>
+        <div class="waiting">Average waiting time: <span id="waiting-time-exclu"></span> s</div>
+
+        <h3>Nonexclusive</h3>
+        <div id="nonexclusive"></div>
+        <div class="waiting">Average waiting time: <span id="waiting-time-nonex"></span> s</div>
+      </div>
+    </div>
+    <footer style="position: fixed; bottom: 0; right: 0; display: flex; justify-content: space-between; width: 100%;">
+      <p>Chalenge by Huynh Thanh Tam | Code by Nguyen Trong Tin</p>
+      <p>Created ©2021</p>
+      <a src="https://github.com/" href="source://github.com">source code</a>
+      
+    </footer>
+    <script src="./main.js"></script>
+  </body>
+</html>
