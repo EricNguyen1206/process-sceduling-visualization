@@ -102,6 +102,7 @@ function averageWaitingTimeNonexclusive(numberOfProgression) {
     for(let j = 0; j < indexArray.length; j++) {
       total -= nonexclusiveExecution[indexArray[j]];
     }
+    total -= tableData[i].arrive;
   }
   return total / numberOfProgression;
 }
