@@ -63,7 +63,7 @@ function deleteRow() {
 
 function sumNfirstNumber(array, n) {
   let total = 0;
-  if(Array.isArray(array)) {
+  if (Array.isArray(array)) {
     for (let i = 0; i <= n; i++) {
       total += parseInt(array[i]);
     }
@@ -99,7 +99,7 @@ function averageWaitingTimeNonexclusive(numberOfProgression) {
       nonexclusiveExecution,
       nonexclusiveExecutionName.lastIndexOf(tableData[i].id)
     );
-    for(let j = 0; j < indexArray.length; j++) {
+    for (let j = 0; j < indexArray.length; j++) {
       total -= nonexclusiveExecution[indexArray[j]];
     }
     total -= tableData[i].arrive;
@@ -346,11 +346,6 @@ function recalculateServiceTime() {
       readyList.shift();
     }
   }
-  //In ra kết quả trên console
-  console.log("Tiến trình phân phối độc quyền: ", progressExecution);
-  console.log("Thời gian phân phối độc quyền: ", progressExecutionName);
-  console.log("Tiến trình phân phối Không độc quyền: ", nonexclusiveExecution);
-  console.log("Thời gian phân phối Không độc quyền: ", nonexclusiveExecutionName);
 
   //Tính toán lại thời gian chờ trung bình
   document.getElementById("waiting-time-exclu").innerHTML = "";
@@ -362,6 +357,23 @@ function recalculateServiceTime() {
   document.getElementById("waiting-time-nonex").innerHTML = parseFloat(
     averageWaitingTimeNonexclusive(tableData.length)
   ).toFixed(2);
+
+  //In ra kết quả trên console
+  console.log("Tiến trình phân phối độc quyền: ", progressExecution);
+  console.log("Thời gian phân phối độc quyền: ", progressExecutionName);
+  console.log(
+    "Thời gian chờ trung bình độc quyền",
+    parseFloat(averageWaitingTimeExclusive(tableData.length)).toFixed(2)
+  );
+  console.log("Tiến trình phân phối Không độc quyền: ", nonexclusiveExecution);
+  console.log(
+    "Thời gian phân phối Không độc quyền: ",
+    nonexclusiveExecutionName
+  );
+  console.log(
+    "Thời gian chờ trung bình độc quyền",
+    parseFloat(averageWaitingTimeNonexclusive(tableData.length)).toFixed(2)
+  );
 }
 
 recalculateServiceTime();
@@ -393,10 +405,10 @@ const draw = function () {
       let progress = document.createElement("p");
       progress.innerHTML = "P" + (nonexclusiveExecutionName[i] + 1);
       progress.style.width = nonexclusiveExecution[i] * 40 + "px";
-      progress.style.animationDuration = nonexclusiveExecution[i] + "s";
+      progress.style.animationDuration = nonexclusiveExecution[i] / 2 + "s";
       progress.style.animationDelay = delay + "s";
       nonexclusive.appendChild(progress);
-      delay += nonexclusiveExecution[i];
+      delay += nonexclusiveExecution[i] / 2;
     }
   }
 };
