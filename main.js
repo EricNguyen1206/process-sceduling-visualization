@@ -15,7 +15,7 @@ function addRow() {
   let timeArrive = document.createElement("td");
   let timeArriveValue = document.createElement("input");
   timeArriveValue.setAttribute("type", "number");
-  timeArriveValue.setAttribute("min", 1);
+  timeArriveValue.setAttribute("min", 0);
   timeArriveValue.setAttribute("max", 200);
   timeArriveValue.setAttribute(
     "value",
@@ -155,8 +155,10 @@ function recalculateServiceTime() {
       progress.execute = 0;
     }
   }
-  if(progress.execute>0 && progress.id != readyList[readyList.length-1].id) {
-    readyList.push(progress);
+  if(progress != undefined) {
+    if(progress.execute>0 && progress.id != readyList[readyList.length-1].id) {
+      readyList.push(progress);
+    }
   }
 
   // Các tiến trình sẽ được cấp cpu theo vòng cho đến khi xử lý xong
