@@ -19,6 +19,10 @@ body {
   text-align: center;
 }
 
+input {
+  font-weight: bold;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -46,27 +50,23 @@ body {
   background-color: var(--lightnavi-color);
 }
 
-#algorithm {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
 .button-group {
   width: 300px;
   height: fit-content;
   display: flex;
   justify-content: space-between;
 }
+
 .button-group button {
   width: 80px;
   height: 31px;
   border: none;
   border-radius: 30px;
   background-color: var(--background-color);
+  font-weight: bold;
 }
 
-.table-control {
+.button-group .table-control {
   width: 300px;
   height: 100px;
   display: flex;
@@ -75,29 +75,37 @@ body {
   align-items: center;
 }
 
-.table-control div {
+.button-group .table-control .btn {
+  cursor: pointer;
+}
+
+.button-group .table-control .btn:hover {
+  color: #fff;
+  background-color: var(--teal-color);
+}
+
+.button-group .table-control div {
   display: flex;
 }
 
-.input-group {
+.button-group .table-control .input-group {
   height: 30px;
   position: relative;
-  visibility: hidden;
 }
-.input-group label {
+.button-group .table-control .input-group label {
   width: 70px;
   height: 31px;
   position: absolute;
   top: 0;
 }
-.input-group label button {
+.button-group .table-control .input-group label button {
   width: 100%;
   height: 30px;
   border: none;
   border-radius: 40px;
   background-color: #c1cfc0;
 }
-.input-group input {
+.button-group .table-control .input-group input {
   width: 90px;
   max-width: 100%;
   height: 100%;
@@ -130,10 +138,6 @@ body {
 .table td input {
   width: 95%;
   background-color: var(--cyan-color);
-}
-
-.table .priority-only {
-  display: none;
 }
 
 #visualizer {

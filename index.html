@@ -5,72 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Process Sceduling Visualization</title>
+    <title>Round Robin Visualization</title>
   </head>
   <body>
     <div class="container">
       <div class="input-container">
         <div class="controller">
-          <h1>Algorithm:</h1>
-          <form id="algorithm">
-            <div class="custom-control custom-radio">
-              <input
-                type="radio"
-                id="fcfs"
-                name="customRadio"
-                class="custom-control-input"
-                value="fcfs"
-                onclick="recalculateServiceTime()"
-              />
-              <label class="custom-control-label" for="FCFS">FCFS</label>
-            </div>
-            <div class="custom-control custom-radio">
-              <input
-                type="radio"
-                id="robin"
-                name="customRadio"
-                class="custom-control-input"
-                value="robin"
-                checked
-                onclick="recalculateServiceTime()"
-              />
-              <label class="custom-control-label" for="robin"
-                >Round Robin</label
-              >
-            </div>
-            <div class="custom-control custom-radio">
-              <input
-                type="radio"
-                id="priority"
-                name="customRadio"
-                class="custom-control-input"
-                value="priority"
-                onclick="recalculateServiceTime()"
-              />
-              <label class="custom-control-label" for="priority"
-                >Priority</label
-              >
-            </div>
-            <div class="custom-control custom-radio">
-              <input
-                type="radio"
-                id="sjf"
-                name="customRadio"
-                class="custom-control-input"
-                value="sjf"
-                onclick="recalculateServiceTime()"
-              />
-              <label class="custom-control-label" for="SJF">SJF</label>
-            </div>
-          </form>
+          <h1>Round Robin Algorithm</h1>
           <div class="button-group">
-            <div class="table-control table-control">
-              <button id="add-row" onclick="addRow()">More row</button>
-              <button id="delete-row" onclick="deleteRow()">Less row</button>
+            <div class="table-control">
+              <button id="add-row" class="btn" onclick="addRow()">More row</button>
+              <button id="delete-row" class="btn" onclick="deleteRow()">Less row</button>
             </div>
 
             <div class="data-figure table-control">
-              <button id="draw" onclick="draw()">Draw</button>
+              <button id="draw" class="btn" onclick="draw()">Draw</button>
               <div class="input-group">
                 <label for="input-block">
                   <button type="button">Quantum</button>
@@ -97,7 +46,7 @@
               <th>Process</th>
               <th>Arrival Time</th>
               <th>Execute Time</th>
-              <th class="priority-only">Priority</th>
+              <th>Waiting Time</th>
             </tr>
           </thead>
           <tbody id="table-body">
@@ -119,19 +68,12 @@
                   type="number"
                   min="1"
                   max="200"
-                  value="5"
+                  value="10"
                   onchange="recalculateServiceTime()"
                 />
               </td>
-              <td class="priority-only initial">
-                <input
-                  class="priority-input"
-                  min="1"
-                  max="200"
-                  type="number"
-                  value="1"
-                  onchange="recalculateServiceTime()"
-                />
+              <td>
+                <span class="waiting"></span>
               </td>
             </tr>
             <tr class="table-row">
@@ -150,38 +92,102 @@
                 <input
                   class="initial exectime"
                   type="number"
-                  value="3"
                   min="1"
                   max="200"
-                  onchange="recalculateServiceTime()"
-                />
-              </td>
-              <td class="priority-only initial">
-                <input
-                  class="priority-input"
-                  min="1"
-                  max="200"
-                  type="number"
                   value="1"
                   onchange="recalculateServiceTime()"
                 />
+              </td>
+              <td>
+                <span class="waiting"></span>
+              </td>
+            </tr>
+            <tr class="table-row">
+              <td>P3</td>
+              <td>
+                <input
+                  class="initial arrivetime"
+                  type="number"
+                  min="1"
+                  max="200"
+                  value="2.5"
+                  onchange="recalculateServiceTime()"
+                />
+              </td>
+              <td>
+                <input
+                  class="initial exectime"
+                  type="number"
+                  min="1"
+                  max="200"
+                  onchange="recalculateServiceTime()"
+                  value="2"
+                />
+              </td>
+              <td>
+                <span class="waiting"></span>
+              </td>
+            </tr>
+            <tr class="table-row">
+              <td>P4</td>
+              <td>
+                <input
+                  class="initial arrivetime"
+                  type="number"
+                  min="1"
+                  max="200"
+                  value="3"
+                  onchange="recalculateServiceTime()"
+                />
+              </td>
+              <td>
+                <input
+                  class="initial exectime"
+                  type="number"
+                  min="1"
+                  max="200"
+                  value="1"
+                  onchange="recalculateServiceTime()"
+                />
+              </td>
+              <td>
+                <span class="waiting"></span>
+              </td>
+            </tr>
+            <tr class="table-row">
+              <td>P5</td>
+              <td>
+                <input
+                  class="initial arrivetime"
+                  type="number"
+                  min="1"
+                  max="200"
+                  value="4.5"
+                  onchange="recalculateServiceTime()"
+                />
+              </td>
+              <td>
+                <input
+                  class="initial exectime"
+                  type="number"
+                  min="1"
+                  max="200"
+                  value="5"
+                  onchange="recalculateServiceTime()"
+                />
+              </td>
+              <td>
+                <span class="waiting"></span>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
       <div id="visualizer">
-        <h3>Exclusive</h3>
-        <div id="exclusive"></div>
-        <div class="waiting">
-          <em>Average waiting time: </em><span id="waiting-time-exclu"></span>
-          <em>ms</em>
-        </div>
-
-        <h3>Nonexclusive</h3>
-        <div id="nonexclusive"></div>
-        <div class="waiting">
-          <em>Average waiting time: </em><span id="waiting-time-nonex"></span>
+        <h3>Process Execution</h3>
+        <div id="execution"></div>
+        <div>
+          <em>Average waiting time: </em><span id="waiting-time"></span>
           <em>ms</em>
         </div>
       </div>
